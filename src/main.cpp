@@ -6,10 +6,10 @@ class Animale{
     char *rasa;
     int varsta;
     public:
-       Animale(char *d);//Constructor
        Animale(char *d,char *r,int v);//Constructor
        Animale(const Animale &obj);//CopyConstructor
        ~Animale();//destructor
+       Animale & operator=(const Animale&)=delete;//disable copy Assignment
        void printNume()
        {
            if(tip)
@@ -26,11 +26,6 @@ class Animale{
            cout<<"Varsta:"<<varsta<<"\n";
        } 
 };
-Animale::Animale(char*t)
-{
-    tip=new char[strlen(t)+1];
-     strcpy(tip,t);
-}
 Animale::Animale(char *t,char *r,int v=0)
 {
      tip=new char[strlen(t)+1];
@@ -54,6 +49,7 @@ Animale::~Animale()
     if(rasa)
     delete rasa;
 }
+
 int main()
 {
     char a1[50],a2[50];
@@ -66,6 +62,15 @@ int main()
     anim.printNume();
     anim.printRasa();
     anim.printVarsta();
+
     Animale anim2(anim);
+
+    char an[]="caine",r[]="Husky";
+    int v=2;
+    Animale anim3(an,r,v);
+    cout<<"A fost declarat animalul:\n";
+    anim3.printNume();
+    anim3.printRasa();
+    anim3.printVarsta();
     return 0;
 }
