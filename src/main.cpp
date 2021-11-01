@@ -8,6 +8,8 @@ class Animale{
     public:
        Animale(char *d);//Constructor
        Animale(char *d,char *r,int v);//Constructor
+       Animale(const Animale &obj);//CopyConstructor
+       ~Animale();//destructor
        void printNume()
        {
            if(tip)
@@ -37,6 +39,21 @@ Animale::Animale(char *t,char *r,int v=0)
      strcpy(rasa,r);
      varsta=v;
 }
+Animale::Animale(const Animale &obj)
+{
+   tip=new char[strlen(obj.tip)+1];
+   strcpy(tip,obj.tip);
+   rasa=new char[strlen(obj.rasa)+1];
+   strcpy(rasa,obj.rasa);
+   varsta=obj.varsta;
+}
+Animale::~Animale()
+{
+    if(tip)
+    delete tip;
+    if(rasa)
+    delete rasa;
+}
 int main()
 {
     char a1[50],a2[50];
@@ -49,5 +66,6 @@ int main()
     anim.printNume();
     anim.printRasa();
     anim.printVarsta();
+    Animale anim2(anim);
     return 0;
 }
